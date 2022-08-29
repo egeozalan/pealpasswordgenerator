@@ -1,0 +1,52 @@
+<html>
+<head>
+  <title>Random Password Generator</title>
+  <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="random.css">
+</head>
+<body>
+<div class="container">
+  <h2>Peal password generator</h2>
+  <input type="text" id="pwdOutput">
+  <button>
+    <i class="far fa-copy" onclick="copyToClipboard()"></i>
+  </button>
+  <button>
+    <i class="fas fa-random" onclick="GenPassword()"></i>
+  </button>
+  <input type="range" id="length" min="6" max="20" value="6" oninput="GenPassword()">
+  <h3 id="length-val">6</h3>
+</div>
+
+<script type="text/javascript">
+const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"$%&/()=?@~`\\.\';:+=^*_-';
+let pwdOutput = document.getElementById("pwdOutput");
+
+function GenPassword(){
+  let length = document.getElementById('length').value;
+  document.getElementById("length-val").textContent = length;
+  let str = '';
+
+  for(let i=0; i<length; i++){
+    let random = randomValue(characters.length);
+    str += characters.charAt(random);
+  }
+  pwdOutput.value = str;
+}
+
+
+function randomValue(value){
+  return Math.floor(Math.random()*value);
+}
+
+function copyToClipboard(){
+  pwdOutput.select();
+  document.execCommand('copy');
+  alert("Şifre kopyalayndı! Kimseyle paylaşma!");
+}
+GenPassword();
+
+</script>
+</body>
+</html>
